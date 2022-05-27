@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../template/favicon.ico" />
+    <title>Alert Blue Dragon</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      body {
+        background: #212529;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> The Blue Dragon </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menuItems"
+          aria-controls="menuItems"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuItems">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tel:+977-9866867256">Call</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:milan.gurungnalim@gmail.com"
+                >Send Email</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="container bg-dark text-light">
+      <h3 id="alert" class="alert-heading text-center">${authStatus}</h3>
+      <form method="post" action="/">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Code</label>
+          <input
+            type="password"
+            class="form-control"
+            id="ingress-code"
+            name="bluecode"
+            required
+          />
+          <div id="emailHelp" class="form-text">
+            hint: Sudden brust of air to block evil
+          </div>
+        </div>
+        </div>
+        <input type="hidden" id="latitude" name="latitude" value="NaN" />
+        <input type="hidden" id="longitude" name="longitude" value="NaN" />
+        <input type="hidden" id="accuracy" name="accuracy" value="NaN" />
+        <button type="submit" class="btn btn-primary">Alert</button>
+      </form>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+      let latitude = document.getElementById("latitude");
+      let longitude = document.getElementById("longitude");
+      let accuracy = document.getElementById("accuracy");
+
+      // Prevent Confirm form Resubmission
+      if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+      }
+
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      };
+
+      function success(pos) {
+        var crd = pos.coords;
+
+        latitude.value = crd.latitude.toString();
+        longitude.value = crd.longitude.toString();
+        accuracy.value = crd.accuracy.toString();
+      }
+
+      function error(err) {
+        errorMessage = err.message;
+      }
+
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    </script>
+  </body>
+</html>
