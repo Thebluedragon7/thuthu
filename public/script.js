@@ -1,8 +1,9 @@
 const socket = io("/");
-const myPeer = new Peer(undefined, {
-  host: "/",
-  port: "3001",
-});
+// const myPeer = new Peer(undefined, {
+//   host: "/",
+//   port: "3001",
+// });
+const myPeer = new Peer();
 const clientSelfVideo = document.createElement("video");
 const videoContainer = document.getElementById("video-container");
 const peers = {};
