@@ -1,4 +1,5 @@
-const homePage = "../views/homePage.html";
+const homePage = "../views/homePage.ejs";
+const { v4: uuidV4 } = require("uuid");
 const newAlert = require("./alertController");
 
 const CODE = "thuthu";
@@ -12,31 +13,33 @@ function isValidCode(bodyData) {
   return true;
 }
 
-const getHome = async (req, res, next) => {
-  res.render(homePage, {
-    locals: { authStatus: "Alert Blue Dragon" },
-  });
-};
-
 const createAlert = async (req, res, next) => {
   let locationEnabled = false;
   console.log(req.body);
   if (isValidCode(req.body)) {
     newAlert(req.body);
     res.render(homePage, {
-      locals: {
-        authStatus:
-          '<span class="alert-success">Alerted Bluedragon Successfully!</span>',
-      },
+      authStatus:
+        '<span class="alert-success">Alerted Bluedragon Successfully!</span>',
     });
   } else {
     res.render(homePage, {
-      locals: {
-        authStatus: '<span class="alert-danger">Incorrect Code</span>',
-      },
+      authStatus: '<span class="alert-danger">Incorrect Code</span>',
     });
   }
 };
 
-exports.getHome = getHome;
+const redirectToVideo = async (req, res, next) => {
+  res.redirect(`/${uuidV4()}`);
+};
+
+const connectVideo = async (req, res, next) => {
+  res.render(homePage, {
+    roomID: req.params.room,
+    authStatus: "Alert Blue Dragon",
+  });
+};
+
+exports.redirectToVideo = redirectToVideo;
+exports.connectVideo = connectVideo;
 exports.createAlert = createAlert;

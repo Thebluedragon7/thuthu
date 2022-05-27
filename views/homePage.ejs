@@ -4,8 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../template/favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <title>Alert Blue Dragon</title>
+    <!-- PeerJS connection -->
+    <script
+      defer
+      src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js"
+    ></script>
+    <script>
+      const ROOM_ID = "<%= roomID %>";
+    </script>
+
+    <!-- Socket -->
+    <script src="http://localhost:9393/socket.io/socket.io.js" defer></script>
+
+    <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,16 +31,31 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="script.js" defer></script>
     <style>
       body {
         background: #212529;
       }
+      #video-container {
+        display: flex;
+        flex-direction: row;
+        grid-template-columns: repeat(auto-fill, 300px);
+        grid-auto-rows: 300px;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 5%;
+      }
     </style>
   </head>
   <body>
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"> The Blue Dragon </a>
+        <a class="navbar-brand" href="/"> The Blue Dragon </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -56,9 +84,11 @@
         </div>
       </div>
     </nav>
+
+    <!-- Main Program -->
     <main class="container bg-dark text-light">
-      <h3 id="alert" class="alert-heading text-center">${authStatus}</h3>
-      <form method="post" action="/">
+      <h3 id="alert" class="alert-heading text-center"><%= authStatus %></h3>
+      <!-- <form method="post" action="/">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Code</label>
           <input
@@ -77,7 +107,10 @@
         <input type="hidden" id="longitude" name="longitude" value="NaN" />
         <input type="hidden" id="accuracy" name="accuracy" value="NaN" />
         <button type="submit" class="btn btn-primary">Alert</button>
-      </form>
+      </form> -->
+
+      <!-- Video Container -->
+      <div id="video-container"></div>
     </main>
 
     <!-- Scripts -->
