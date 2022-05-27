@@ -4,10 +4,12 @@ const newAlert = async (data) => {
   latitude = data.latitude;
   longitude = data.longitude;
   accuracy = data.accuracy;
+  room = data.room;
   let alert = new Alert({
     latitude: latitude,
     longitude: longitude,
     accuracy: accuracy,
+    room: room,
   });
 
   alert = await alert.save();

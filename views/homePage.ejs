@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="favicon.ico" />
-    <title>Alert Blue Dragon</title>
+    <title>Warning! You're entering a cave!</title>
     <!-- PeerJS connection -->
     <script
       defer
@@ -16,12 +16,12 @@
     </script>
 
     <!-- Socket -->
-    <script
+    <!-- <script
       src="https://thu-thu.herokuapp.com/socket.io/socket.io.js"
       defer
-    ></script>
+    ></script> -->
     <!-- Local Server -->
-    <!-- <script src="http://localhost:9393/socket.io/socket.io.js" defer></script> -->
+    <script src="http://localhost:9393/socket.io/socket.io.js" defer></script>
 
     <!-- Bootstrap -->
     <link
@@ -60,7 +60,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"> The Blue Dragon </a>
+        <a class="navbar-brand" href="/"> Welcome to Blue Dragon's Cave! </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -85,6 +85,36 @@
                 >Send Email</a
               >
             </li>
+            <li class="nav-item">
+              <form method="post" action="/">
+                <!-- Hidden Values -->
+                <input
+                  type="hidden"
+                  id="latitude"
+                  name="latitude"
+                  value="NaN"
+                />
+                <input
+                  type="hidden"
+                  id="longitude"
+                  name="longitude"
+                  value="NaN"
+                />
+                <input
+                  type="hidden"
+                  id="accuracy"
+                  name="accuracy"
+                  value="NaN"
+                />
+                <input
+                  type="hidden"
+                  id="room"
+                  name="room"
+                  value="<%= roomID %>"
+                />
+                <button type="submit" class="btn btn-primary">Alert</button>
+              </form>
+            </li>
           </ul>
         </div>
       </div>
@@ -92,30 +122,8 @@
 
     <!-- Main Program -->
     <main class="container bg-dark text-light">
-      <h3 id="alert" class="alert-heading text-center"><%= authStatus %></h3>
-      <!-- <form method="post" action="/">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Code</label>
-          <input
-            type="password"
-            class="form-control"
-            id="ingress-code"
-            name="bluecode"
-            required
-          />
-          <div id="emailHelp" class="form-text">
-            hint: Sudden brust of air to block evil
-          </div>
-        </div>
-        </div>
-        <input type="hidden" id="latitude" name="latitude" value="NaN" />
-        <input type="hidden" id="longitude" name="longitude" value="NaN" />
-        <input type="hidden" id="accuracy" name="accuracy" value="NaN" />
-        <button type="submit" class="btn btn-primary">Alert</button>
-      </form> -->
-
       <!-- Video Container -->
-      <div id="video-container"></div>
+      <div class="container" id="video-container"></div>
     </main>
 
     <!-- Scripts -->

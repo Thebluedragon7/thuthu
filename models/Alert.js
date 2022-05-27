@@ -19,6 +19,10 @@ const alertSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  room: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Alert", alertSchema);
